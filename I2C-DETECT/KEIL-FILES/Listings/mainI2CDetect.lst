@@ -1,0 +1,88 @@
+C51 COMPILER V9.60.7.0   MAINI2CDETECT                                                     10/16/2024 14:21:13 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE MAINI2CDETECT
+OBJECT MODULE PLACED IN .\Objects\mainI2CDetect.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE mainI2CDetect.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\List
+                    -ings\mainI2CDetect.lst) TABS(2) OBJECT(.\Objects\mainI2CDetect.obj)
+
+line level    source
+
+   1          #include "i2cDetectHeader.h"
+   2          void main()
+   3          {
+   4   1        i2cDetect();
+   5   1      }
+   6          
+   7          
+   8          
+   9          
+  10          
+  11          
+  12          
+  13          
+  14          
+  15          /*
+  16          #include <reg51.h>
+  17          #include "types.h"
+  18          #include "lcd_headers.h"
+  19          #include "i2c_headers.h"
+  20          #include "dlyMs.h"
+  21          bit I2C_Write(u8 dat);
+  22          sbit SDA = P3^7; // Define SDA pin
+  23          sbit SCL = P3^6; // Define SCL pin
+  24          
+  25          void main()
+  26          {
+  27            u8 nDevices=0;  u8 ack;
+  28            u8 address; 
+  29            lcd_init();
+  30            lcd_cmd(0x80);
+  31            lcd_string("Scanning...");
+  32            while(1){
+  33            for(address=0;address<127;address++)
+  34              {
+  35                i2cStart();
+  36                ack=I2C_Write((address<<1)|0);
+  37                if(ack==0)
+  38                {
+  39                  ++nDevices;
+  40          
+  41                  lcd_cmd(0xC0);
+  42                  lcd_string("I2C Device:");
+  43                  lcd_string("0x");
+  44                  HexLCD(address);
+  45                }
+  46                i2cStop();
+  47                dlyMs(100);     
+  48              }
+  49              lcd_init();
+  50              lcd_cmd(0x80);
+  51              lcd_string("Devices Found:");
+  52              lcd_cmd(0xC0);
+  53              lcd_int(nDevices);
+  54              while(1);
+C51 COMPILER V9.60.7.0   MAINI2CDETECT                                                     10/16/2024 14:21:13 PAGE 2   
+
+  55            }
+  56          }
+  57          */
+  58          
+  59          
+  60          
+  61          
+  62          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =      3    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

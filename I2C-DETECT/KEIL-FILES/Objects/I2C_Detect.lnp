@@ -1,0 +1,6 @@
+".\Objects\mainI2CDetect.obj",
+".\Objects\lcd_drivers.obj",
+".\Objects\dlyMs.obj",
+".\Objects\i2cDetectDriver.obj" 
+TO ".\Objects\I2C_Detect" 
+PRINT(".\Listings\I2C_Detect.m51")
