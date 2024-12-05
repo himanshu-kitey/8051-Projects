@@ -1,0 +1,276 @@
+C51 COMPILER V9.60.0.0   _MAIN_IFDS1                                                       09/17/2021 22:04:42 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE _MAIN_IFDS1
+OBJECT MODULE PLACED IN .\Objects\_main_IFDS1.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE _main_IFDS1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listin
+                    -gs\_main_IFDS1.lst) TABS(2) OBJECT(.\Objects\_main_IFDS1.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include "_delay_ms.h"
+   3          #include "_keypad_headers.h"
+   4          #include "_main_headers.h"
+   5          #include "_lcd_headers.h"
+   6          #include "_i2c_headers.h"
+   7          #include "_spi_headers.h"
+   8          #include "_void_keyboard.h"
+   9          
+  10          sbit gLED=P1^6;
+  11          sbit rLED=P1^7;
+  12          
+  13          _U8 pass[5],i,set,v,cnt,wrong,time;
+  14          _U16 a;
+  15          
+  16          
+  17          _U8 sub_keypad()
+  18          {
+  19   1        while(i=keypad('*'))
+  20   1           { 
+  21   2             if(i=='D' && v!=0)
+  22   2             {
+  23   3               lcd_cmd();
+  24   3               pass_str();
+  25   3               _lcd_2ndLine();
+  26   3               back_loop(--v,pass);
+  27   3             }        
+  28   2        else  if(v==5)
+  29   2             {
+  30   3                if(i=='#') break;
+  31   3               else return 1;   
+  32   3             }
+  33   2        else  if(i=='*') return 0;         
+  34   2        else  if(i!='#' && i!='D')
+  35   2                {
+  36   3                 pass[v++]=i;
+  37   3                  _write_data(i);
+  38   3                }
+  39   2            }
+  40   1             return 2;
+  41   1      }
+  42          
+  43          void int0(void) interrupt 0
+  44          {
+  45   1           if(wrong==3)
+  46   1           {
+  47   2            lcd_cmd();
+  48   2            _lcd_stringData("Wait Time:");   
+  49   2           while(time)
+  50   2           {
+  51   3            i=keypad(' ');
+  52   3            if(i=='*') goto EXIT;
+  53   3      
+  54   3             _lcd_2ndLine();      
+C51 COMPILER V9.60.0.0   _MAIN_IFDS1                                                       09/17/2021 22:04:42 PAGE 2   
+
+  55   3            if(time==9)
+  56   3            {
+  57   4              _lcd_stringData("        ");
+  58   4            _lcd_2ndLine();
+  59   4            }
+  60   3            _lcd_intData(time--);
+  61   3            _lcd_stringData(" Secs");
+  62   3            _delay_ms(900);
+  63   3          } 
+  64   2          wrong=0;
+  65   2          } 
+  66   1         
+  67   1          PRO:    lcd_cmd();
+  68   1          pass_str();
+  69   1         _lcd_2ndLine();
+  70   1         cnt=0;
+  71   1          v=0;
+  72   1      AGAIN: 
+  73   1               a=sub_keypad();         
+  74   1               if(a==0) goto EXIT;
+  75   1               if(a==1) goto AGAIN;
+  76   1        
+  77   1          for(i=0;i<v;i++)
+  78   1           {
+  79   2          if(pass[i] != i2c_random_read(i))
+  80   2              break;
+  81   2           }
+  82   1           lcd_cmd();
+  83   1           if(i==5)
+  84   1           {
+  85   2             wrong=0;
+  86   2             gLED=1;
+  87   2             rLED=0;
+  88   2             _lcd_stringData("1.Change Current Pass");
+  89   2             _lcd_2ndLine();
+  90   2             _lcd_stringData("2.Change Set Tmp"); 
+  91   2           v=keypad('A');
+  92   2             if(v=='1')
+  93   2             {
+  94   3               lcd_cmd();
+  95   3               pass_str();
+  96   3              _lcd_2ndLine();
+  97   3               cnt=v=0;
+  98   3      AGAIN1: 
+  99   3               a=sub_keypad();         
+ 100   3               if(a==0) goto EXIT;
+ 101   3               if(a==1) goto AGAIN1;
+ 102   3            
+ 103   3             for(i=0;i<5;i++)
+ 104   3             i2c_byte_write(i,pass[i]);
+ 105   3                lcd_cmd();
+ 106   3                sucess_str();
+ 107   3                delay_3();
+ 108   3            }
+ 109   2        else  if(v=='2')
+ 110   2           {
+ 111   3      REPEAT:
+ 112   3               lcd_cmd();
+ 113   3               set_str();
+ 114   3               _lcd_2ndLine();
+ 115   3               cnt=a=v=0;
+ 116   3      SUPER:     
+C51 COMPILER V9.60.0.0   _MAIN_IFDS1                                                       09/17/2021 22:04:42 PAGE 3   
+
+ 117   3            while(i=keypad('*'))
+ 118   3            {
+ 119   4              if(i=='D' && v!=0)
+ 120   4              {
+ 121   5                lcd_cmd();
+ 122   5                set_str();
+ 123   5                _lcd_2ndLine(); 
+ 124   5                back_loop(--v,pass);
+ 125   5              } 
+ 126   4            else  if(i=='*') goto EXIT;
+ 127   4            else  if(v>0 && i=='#') break;
+ 128   4            else  if(v>3) goto SUPER;
+ 129   4            else  if(i>='0' && i<='9')
+ 130   4              {
+ 131   5                 a=(a*10)+i-48;
+ 132   5                _write_data(i);
+ 133   5                pass[v++]=i;
+ 134   5              }
+ 135   4            }
+ 136   3              
+ 137   3                if(a<=150)
+ 138   3                 {
+ 139   4                    for(i=0;i<3;i++)
+ 140   4                    i2c_byte_write(i+8,0xff);
+ 141   4                    set=0;
+ 142   4                    for(i=0;i<v;i++)
+ 143   4                   {
+ 144   5                    set=set*10 + (pass[i]-48);
+ 145   5                    i2c_byte_write(i+8,pass[i]);
+ 146   5                   }
+ 147   4                 }
+ 148   3                 else
+ 149   3                 {
+ 150   4                   lcd_cmd();
+ 151   4                   _lcd_stringData("Threshold Range");
+ 152   4                   _lcd_2ndLine();  
+ 153   4                   _lcd_stringData("Exceeded");
+ 154   4                   delay_3();
+ 155   4                   goto REPEAT;
+ 156   4                 }
+ 157   3                lcd_cmd();
+ 158   3                sucess_str();
+ 159   3                delay_3();
+ 160   3           }
+ 161   2         }
+ 162   1           else
+ 163   1           {
+ 164   2             wrong++;
+ 165   2             gLED=0;
+ 166   2             rLED=1;
+ 167   2             if(wrong==3)
+ 168   2             {
+ 169   3                lcd_cmd();
+ 170   3                _lcd_stringData("YOU ARE BLOCKED");
+ 171   3                _lcd_2ndLine();
+ 172   3                _lcd_stringData("TRY AGAIN LATER");
+ 173   3               delay_3();
+ 174   3               time=60;        
+ 175   3               goto EXIT;
+ 176   3             }
+ 177   2            _lcd_stringData("Incorrect");
+ 178   2              delay_3();  
+C51 COMPILER V9.60.0.0   _MAIN_IFDS1                                                       09/17/2021 22:04:42 PAGE 4   
+
+ 179   2              goto PRO;   
+ 180   2             }         
+ 181   1      
+ 182   1      EXIT:   
+ 183   1             _lcd_cmd();    
+ 184   1      }
+ 185          
+ 186          main()
+ 187          {
+ 188   1        _F32 t;
+ 189   1        IE=0X81;
+ 190   1        IT0=1;
+ 191   1        _lcd_init();
+ 192   1        set=wrong=rLED=gLED=time=0;
+ 193   1        
+ 194   1        /*
+ 195   1      //  Initialize below commented code once only
+ 196   1        
+ 197   1        for(i=1;i<7;i++)
+ 198   1        {
+ 199   1          i2c_byte_write(i-1,i+48);
+ 200   1        }
+ 201   1        for(i=1;i<3;i++)
+ 202   1        {
+ 203   1          i2c_byte_write(i-1+8,i+48);
+ 204   1        }
+ 205   1          
+ 206   1      //  Note: If code size is exceeded. Then, Comment below code and run above code.
+ 207   1      */
+ 208   1        for(i=0;i<3;i++)
+ 209   1        {
+ 210   2          v=i2c_random_read(i+8);
+ 211   2          if(v==0xff) break;
+ 212   2         set=set*10+(v-48);
+ 213   2        }
+ 214   1        while(1)
+ 215   1        {
+ 216   2          if(time)
+ 217   2          {
+ 218   3            _delay_ms(650);
+ 219   3            time--;
+ 220   3            if(time==0) 
+ 221   3              wrong=0;
+ 222   3          } 
+ 223   2          _lcd_init();
+ 224   2          t=fread_mcp3204_from_lm35();
+ 225   2          _write_cmd(0x80);
+ 226   2          _lcd_stringData("Temperature is :");
+ 227   2          _lcd_2ndLine();
+ 228   2          _lcd_floatData(t);
+ 229   2          if(t>set)
+ 230   2          {
+ 231   3            gLED=0; rLED=1;
+ 232   3          }
+ 233   2          else
+ 234   2          {
+ 235   3            gLED=1; rLED=0;
+ 236   3          }
+ 237   2          _delay_ms(300);
+ 238   2        } 
+ 239   1      }
+ 240          
+C51 COMPILER V9.60.0.0   _MAIN_IFDS1                                                       09/17/2021 22:04:42 PAGE 5   
+
+ 241          
+ 242          
+ 243          
+ 244          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    963    ----
+   CONSTANT SIZE    =    149    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     13       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

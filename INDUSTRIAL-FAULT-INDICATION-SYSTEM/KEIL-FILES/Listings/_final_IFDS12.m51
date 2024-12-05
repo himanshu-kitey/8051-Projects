@@ -1,0 +1,265 @@
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                    09/06/2021  10:21:47  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22.2.0, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\_main_IFDS.obj, .\Objects\_delay_ms.obj, .\Objects\_i2c_defines.obj, .\Objects\_ke
+>> ypad_defines.obj, .\Objects\_lcd_defines.obj, .\Objects\_main_defines.obj, .\Objects\_spi_defines.obj TO .\Objects\_f
+>> inal_IFDS12 PRINT (.\Listings\_final_IFDS12.m51)
+
+
+MEMORY MODEL: SMALL WITH FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\_main_IFDS.obj (_MAIN_IFDS)
+  .\Objects\_delay_ms.obj (_DELAY_MS)
+  .\Objects\_i2c_defines.obj (_I2C_DEFINES)
+  .\Objects\_keypad_defines.obj (_KEYPAD_DEFINES)
+  .\Objects\_lcd_defines.obj (_LCD_DEFINES)
+  .\Objects\_main_defines.obj (_MAIN_DEFINES)
+  .\Objects\_spi_defines.obj (_SPI_DEFINES)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPADD)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPMUL)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPCMP)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FCAST)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?CASTF)
+  C:\KEIL_V5\C51\LIB\C51FPS.LIB (?C?FPGETOPN)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDOPTR)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?IMUL)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C?LNEG)
+  C:\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  .\Objects\_final_IFDS12 (_MAIN_IFDS)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0010H     UNIT         ?DT?_KEYPAD_DEFINES
+            DATA    0018H     000DH     UNIT         ?DT?_MAIN_IFDS
+            DATA    0025H     000DH     UNIT         _DATA_GROUP_
+            DATA    0032H     0004H     UNIT         ?DT?_LCD_DEFINES
+            DATA    0036H     0001H     UNIT         ?DT?_MAIN_DEFINES
+            IDATA   0037H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0003H     ABSOLUTE     
+                    0006H     07FAH                  *** GAP ***
+            CODE    0800H     039CH     UNIT         ?C?LIB_CODE
+            CODE    0B9CH     02B9H     UNIT         ?PR?INT0?_MAIN_IFDS
+            CODE    0E55H     00A9H     UNIT         ?PR?_KEYPAD?_KEYPAD_DEFINES
+            CODE    0EFEH     009BH     UNIT         ?PR?MAIN?_MAIN_IFDS
+            CODE    0F99H     008CH     UNIT         ?C_C51STARTUP
+            CODE    1025H     0088H     UNIT         ?PR?FREAD_MCP3204_FROM_LM35?_SPI_DEFINES
+            CODE    10ADH     007CH     UNIT         ?CO?_MAIN_IFDS
+            CODE    1129H     0066H     UNIT         ?PR?__LCD_FLOATDATA?_LCD_DEFINES
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/06/2021  10:21:47  PAGE 2
+
+
+            CODE    118FH     0060H     UNIT         ?PR?SUB_KEYPAD?_MAIN_IFDS
+            CODE    11EFH     0044H     UNIT         ?PR?_LCD_INIT?_LCD_DEFINES
+            CODE    1233H     0034H     UNIT         ?PR?__LCD_INTDATA?_LCD_DEFINES
+            CODE    1267H     002AH     UNIT         ?PR?_BACK_LOOP?_MAIN_DEFINES
+            CODE    1291H     0029H     UNIT         ?CO?_MAIN_DEFINES
+            CODE    12BAH     0025H     UNIT         ?PR?_I2C_WRITE?_I2C_DEFINES
+            CODE    12DFH     0025H     UNIT         ?PR?I2C_READ?_I2C_DEFINES
+            CODE    1304H     0025H     UNIT         ?PR?__LCD_STRINGDATA?_LCD_DEFINES
+            CODE    1329H     001EH     UNIT         ?PR?__DELAY_MS?_DELAY_MS
+            CODE    1347H     001EH     UNIT         ?PR?_I2C_BYTE_WRITE?_I2C_DEFINES
+            CODE    1365H     001EH     UNIT         ?PR?_I2C_RANDOM_READ?_I2C_DEFINES
+            CODE    1383H     0015H     UNIT         ?PR?I2C_SLAVE_ACK?_I2C_DEFINES
+            CODE    1398H     0013H     UNIT         ?C_INITSEG
+            CODE    13ABH     0012H     UNIT         ?PR?__WRITE_CMD?_LCD_DEFINES
+            CODE    13BDH     0012H     UNIT         ?PR?__WRITE_DATA?_LCD_DEFINES
+            CODE    13CFH     000AH     UNIT         ?PR?_LCD_CMD?_MAIN_DEFINES
+            CODE    13D9H     0009H     UNIT         ?PR?I2C_STOP?_I2C_DEFINES
+            CODE    13E2H     0009H     UNIT         ?PR?I2C_RESTART?_I2C_DEFINES
+            CODE    13EBH     0009H     UNIT         ?PR?SET_STR?_MAIN_DEFINES
+            CODE    13F4H     0009H     UNIT         ?PR?SUCESS_STR?_MAIN_DEFINES
+            CODE    13FDH     0009H     UNIT         ?PR?PASS_STR?_MAIN_DEFINES
+            CODE    1406H     0007H     UNIT         ?PR?I2C_NOT_ACK?_I2C_DEFINES
+            CODE    140DH     0007H     UNIT         ?PR?DELAY_3?_MAIN_DEFINES
+            CODE    1414H     0005H     UNIT         ?PR?_LCD_2NDLINE?_MAIN_DEFINES
+            CODE    1419H     0003H     UNIT         ?PR?I2C_START?_I2C_DEFINES
+
+
+
+OVERLAY MAP OF MODULE:   .\Objects\_final_IFDS12 (_MAIN_IFDS)
+
+
+SEGMENT                                            DATA_GROUP 
+  +--> CALLED SEGMENT                            START    LENGTH
+----------------------------------------------------------------
+?PR?INT0?_MAIN_IFDS                              -----    -----
+  +--> ?PR?_LCD_CMD?_MAIN_DEFINES
+  +--> ?CO?_MAIN_IFDS
+  +--> ?PR?__LCD_STRINGDATA?_LCD_DEFINES
+  +--> ?PR?_KEYPAD?_KEYPAD_DEFINES
+  +--> ?PR?_LCD_2NDLINE?_MAIN_DEFINES
+  +--> ?PR?__LCD_INTDATA?_LCD_DEFINES
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+  +--> ?PR?PASS_STR?_MAIN_DEFINES
+  +--> ?PR?SUB_KEYPAD?_MAIN_IFDS
+  +--> ?PR?_I2C_RANDOM_READ?_I2C_DEFINES
+  +--> ?PR?_I2C_BYTE_WRITE?_I2C_DEFINES
+  +--> ?PR?SET_STR?_MAIN_DEFINES
+  +--> ?PR?_BACK_LOOP?_MAIN_DEFINES
+  +--> ?PR?__WRITE_DATA?_LCD_DEFINES
+  +--> ?PR?DELAY_3?_MAIN_DEFINES
+  +--> ?PR?SUCESS_STR?_MAIN_DEFINES
+
+?PR?_LCD_CMD?_MAIN_DEFINES                       -----    -----
+  +--> ?PR?__WRITE_CMD?_LCD_DEFINES
+
+?PR?__WRITE_CMD?_LCD_DEFINES                     -----    -----
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/06/2021  10:21:47  PAGE 3
+
+
+
+?PR?__LCD_STRINGDATA?_LCD_DEFINES                0025H    0003H
+  +--> ?PR?__WRITE_DATA?_LCD_DEFINES
+
+?PR?__WRITE_DATA?_LCD_DEFINES                    -----    -----
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+
+?PR?_LCD_2NDLINE?_MAIN_DEFINES                   -----    -----
+  +--> ?PR?__WRITE_CMD?_LCD_DEFINES
+
+?PR?__LCD_INTDATA?_LCD_DEFINES                   -----    -----
+  +--> ?PR?__WRITE_DATA?_LCD_DEFINES
+
+?PR?PASS_STR?_MAIN_DEFINES                       -----    -----
+  +--> ?CO?_MAIN_DEFINES
+  +--> ?PR?__LCD_STRINGDATA?_LCD_DEFINES
+
+?PR?SUB_KEYPAD?_MAIN_IFDS                        -----    -----
+  +--> ?PR?_KEYPAD?_KEYPAD_DEFINES
+  +--> ?PR?_LCD_CMD?_MAIN_DEFINES
+  +--> ?PR?PASS_STR?_MAIN_DEFINES
+  +--> ?PR?_LCD_2NDLINE?_MAIN_DEFINES
+  +--> ?PR?_BACK_LOOP?_MAIN_DEFINES
+  +--> ?PR?__WRITE_DATA?_LCD_DEFINES
+
+?PR?_BACK_LOOP?_MAIN_DEFINES                     0025H    0004H
+  +--> ?PR?__WRITE_DATA?_LCD_DEFINES
+
+?PR?_I2C_RANDOM_READ?_I2C_DEFINES                -----    -----
+  +--> ?PR?I2C_START?_I2C_DEFINES
+  +--> ?PR?I2C_SLAVE_ACK?_I2C_DEFINES
+  +--> ?PR?I2C_RESTART?_I2C_DEFINES
+  +--> ?PR?_I2C_WRITE?_I2C_DEFINES
+  +--> ?PR?I2C_READ?_I2C_DEFINES
+  +--> ?PR?I2C_NOT_ACK?_I2C_DEFINES
+  +--> ?PR?I2C_STOP?_I2C_DEFINES
+
+?PR?I2C_SLAVE_ACK?_I2C_DEFINES                   -----    -----
+  +--> ?PR?_I2C_WRITE?_I2C_DEFINES
+
+?PR?_I2C_BYTE_WRITE?_I2C_DEFINES                 -----    -----
+  +--> ?PR?I2C_START?_I2C_DEFINES
+  +--> ?PR?_I2C_WRITE?_I2C_DEFINES
+  +--> ?PR?I2C_SLAVE_ACK?_I2C_DEFINES
+  +--> ?PR?I2C_STOP?_I2C_DEFINES
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+
+?PR?SET_STR?_MAIN_DEFINES                        -----    -----
+  +--> ?CO?_MAIN_DEFINES
+  +--> ?PR?__LCD_STRINGDATA?_LCD_DEFINES
+
+?PR?DELAY_3?_MAIN_DEFINES                        -----    -----
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+
+?PR?SUCESS_STR?_MAIN_DEFINES                     -----    -----
+  +--> ?CO?_MAIN_DEFINES
+  +--> ?PR?__LCD_STRINGDATA?_LCD_DEFINES
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/06/2021  10:21:47  PAGE 4
+
+
+
+*** NEW ROOT ***************************************************
+
+?C_C51STARTUP                                    -----    -----
+  +--> ?PR?MAIN?_MAIN_IFDS
+  +--> ?C_INITSEG
+
+?PR?MAIN?_MAIN_IFDS                              0029H    0004H
+  +--> ?PR?_LCD_INIT?_LCD_DEFINES
+  +--> ?PR?_I2C_RANDOM_READ?_I2C_DEFINES
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+  +--> ?PR?FREAD_MCP3204_FROM_LM35?_SPI_DEFINES
+  +--> ?PR?__WRITE_CMD?_LCD_DEFINES
+  +--> ?PR?__LCD_FLOATDATA?_LCD_DEFINES
+
+?PR?_LCD_INIT?_LCD_DEFINES                       -----    -----
+  +--> ?PR?__DELAY_MS?_DELAY_MS
+  +--> ?PR?__WRITE_CMD?_LCD_DEFINES
+
+?PR?FREAD_MCP3204_FROM_LM35?_SPI_DEFINES         002DH    0004H
+
+?PR?__LCD_FLOATDATA?_LCD_DEFINES                 002DH    0005H
+  +--> ?PR?__LCD_INTDATA?_LCD_DEFINES
+  +--> ?PR?__WRITE_DATA?_LCD_DEFINES
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\_final_IFDS12 (_MAIN_IFDS)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C?FPADD
+  C:0807H         PUBLIC        ?C?FPADD
+  C:0803H         PUBLIC        ?C?FPSUB
+  -------         ENDMOD        ?C?FPADD
+
+  -------         MODULE        ?C?FPMUL
+  C:08F8H         PUBLIC        ?C?FPMUL
+  -------         ENDMOD        ?C?FPMUL
+
+  -------         MODULE        ?C?FPCMP
+  C:0A00H         PUBLIC        ?C?FPCMP
+  C:09FEH         PUBLIC        ?C?FPCMP3
+  -------         ENDMOD        ?C?FPCMP
+
+  -------         MODULE        ?C?FCAST
+  C:0A81H         PUBLIC        ?C?FCASTC
+  C:0A7CH         PUBLIC        ?C?FCASTI
+  C:0A77H         PUBLIC        ?C?FCASTL
+  -------         ENDMOD        ?C?FCAST
+
+  -------         MODULE        ?C?CASTF
+  C:0AB5H         PUBLIC        ?C?CASTF
+  -------         ENDMOD        ?C?CASTF
+
+  -------         MODULE        ?C?CLDPTR
+BL51 BANKED LINKER/LOCATER V6.22.2.0                                                  09/06/2021  10:21:47  PAGE 5
+
+
+  C:0B36H         PUBLIC        ?C?CLDPTR
+  -------         ENDMOD        ?C?CLDPTR
+
+  -------         MODULE        ?C?CLDOPTR
+  C:0B4FH         PUBLIC        ?C?CLDOPTR
+  -------         ENDMOD        ?C?CLDOPTR
+
+  -------         MODULE        ?C?IMUL
+  C:0B7CH         PUBLIC        ?C?IMUL
+  -------         ENDMOD        ?C?IMUL
+
+  -------         MODULE        ?C?LNEG
+  C:0B8EH         PUBLIC        ?C?LNEG
+  -------         ENDMOD        ?C?LNEG
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 07F6H BYTE (99%) *
+******************************************************************************
+
+Program Size: data=56.0 xdata=0 code=3106
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

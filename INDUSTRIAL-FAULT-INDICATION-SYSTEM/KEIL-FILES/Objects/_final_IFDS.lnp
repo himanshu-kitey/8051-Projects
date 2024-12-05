@@ -1,0 +1,9 @@
+".\Objects\_main_IFDS.obj",
+".\Objects\_delay_ms.obj",
+".\Objects\_i2c_defines.obj",
+".\Objects\_keypad_defines.obj",
+".\Objects\_lcd_defines.obj",
+".\Objects\_main_defines.obj",
+".\Objects\_spi_defines.obj" 
+TO ".\Objects\_final_IFDS" 
+PRINT(".\Listings\_final_IFDS.m51")
