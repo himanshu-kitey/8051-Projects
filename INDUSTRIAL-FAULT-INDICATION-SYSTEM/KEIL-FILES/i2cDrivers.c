@@ -1,44 +1,49 @@
 #include <reg51.h>
-#include "_types.h"
-#include "_delay_ms.h"
+#include "types.h"
+#include "dlyMs.h"
+
 sbit SCL=P1^4;
 sbit SDA=P1^5;
 
-void i2c_start()
+void i2c_start(void)
 {
 	SDA=0;
 }
-void i2c_stop()
+
+void i2c_stop(void)
 {
 	SCL=0;
 	SDA=0;
 	SCL=1;
 	SDA=1;
 }
-void i2c_restart()
+
+void i2c_restart(void)
 {
 	SCL=0;
 	SDA=1;
 	SCL=1;
 	SDA=0;
 }
-void i2c_slave_ack()
+
+void i2c_slave_ack(void)
 {
 	SCL=0;
 	SDA=1;
 	SCL=1;
 	while(SDA);
 }
-void i2c_not_ack()
+
+void i2c_not_ack(void)
 {
 	SCL=0;
 	SDA=1;
 	SCL=1;
 }
 
-void i2c_write(_U8 value)
+void i2c_write(u8 value)
 {
-	_U8 i;
+	u8 i;
 	for(i=0;i<8;i++)
 	{
 		SCL=0;
@@ -46,9 +51,10 @@ void i2c_write(_U8 value)
 		SCL=1;
 	}
 }
-_U8 i2c_read()
+
+u8 i2c_read(void)
 {
-	_U8 i,buff=0;
+	u8 i,buff=0;
 	for(i=0;i<8;i++)
 	{
 		SCL=0; SCL=1;
@@ -57,7 +63,7 @@ _U8 i2c_read()
 	return buff;
 }
 
-void i2c_byte_write(_U8 ad,_U8 da)
+void i2c_byte_write(u8 ad,u8 da)
 {
 	i2c_start();
 	i2c_write(0x50<<1);
@@ -67,11 +73,12 @@ void i2c_byte_write(_U8 ad,_U8 da)
 	i2c_write(da);
 	i2c_slave_ack();
 	i2c_stop();
-	_delay_ms(10);
+	dlyMs(10);
 }
-_U8 i2c_random_read(_U8 ad)
+
+u8 i2c_random_read(u8 ad)
 {
-	_U8 buff;
+	u8 buff;
 	i2c_start();
 	i2c_write(0x50<<1);
 	i2c_slave_ack();

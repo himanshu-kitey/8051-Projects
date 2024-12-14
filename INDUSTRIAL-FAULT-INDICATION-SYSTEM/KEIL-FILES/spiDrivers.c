@@ -1,20 +1,20 @@
 #include <reg51.h>
-#include "_types.h"
-#include "_main_headers.h"
-#include "_delay_ms.h"
+#include "types.h"
+#include "mainHeaders.h"
+#include "dlyMs.h"
 
 sbit CLK=P1^0;
 sbit Din=P1^1;
 sbit Dout=P1^2;
-sbit _CS=P1^3;
+sbit CS=P1^3;
 
-_F32 fread_mcp3204_from_lm35()
+f32 fread_mcp3204_from_lm35()
 {
-	_U8 i;
- _U16 adc_value=0;
- _F32 analog_reading;
-	CLK=Din=Dout=_CS=1;
-	_CS=0;
+	u8 i;
+	u16 adc_value=0;
+	f32 analog_reading;
+	CLK=Din=Dout=CS=1;
+	CS=0;
 	CLK =0; CLK=1;
 	CLK =0; CLK=1;
 	CLK =0; CLK=1;
@@ -30,7 +30,7 @@ _F32 fread_mcp3204_from_lm35()
 		CLK=1;
 		if(Dout) adc_value |= (1<<(11-i));
 	}
-	_CS=1;	
+	CS=1;	
 	analog_reading = adc_value * (5.0/4096);
 	return analog_reading*100;
 }

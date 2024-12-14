@@ -1,0 +1,9 @@
+".\Objects\main_IFDS.obj",
+".\Objects\dlyMs.obj",
+".\Objects\i2cDrivers.obj",
+".\Objects\keypadDrivers.obj",
+".\Objects\lcdDrivers.obj",
+".\Objects\mainDefines.obj",
+".\Objects\spiDrivers.obj" 
+TO ".\Objects\IFDS" 
+PRINT(".\Listings\IFDS.m51")

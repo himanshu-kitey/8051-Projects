@@ -1,6 +1,6 @@
 #include <reg51.h>
-#include "_types.h"
-#include "_delay_ms.h"
+#include "types.h"
+#include "dlyMs.h"
 
 sbit R0=P2^0;
 sbit R1=P2^1;
@@ -11,15 +11,16 @@ sbit C1=P2^5;
 sbit C2=P2^6;
 sbit C3=P2^7;
 
-const _U8 keypad_data[4][4]={'7','8','9','A',
-                           '4','5','6','B',
-                           '1','2','3','C',
-                           '*','0','#','D'};
+const u8 keypad_data[4][4]={ '7', '8', '9', 'A',
+                             '4', '5', '6', 'B',
+                             '1', '2', '3', 'C',
+                             '*', '0', '#', 'D'
+													 };
 
-_U8 keypad(_U8 z)
+u8 keypad(u8 z)
 {
 	
-	_U8 r,c;
+	u8 r,c;
 	R0=R1=R2=R3=0;
 	C0=C1=C2=C3=1;
 	while(C0&&C1&&C2&&C3)

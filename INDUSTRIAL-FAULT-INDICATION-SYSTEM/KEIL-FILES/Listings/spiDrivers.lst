@@ -1,0 +1,66 @@
+C51 COMPILER V9.60.7.0   SPIDRIVERS                                                        12/14/2024 20:52:35 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE SPIDRIVERS
+OBJECT MODULE PLACED IN .\Objects\spiDrivers.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE spiDrivers.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\spiDrivers.lst) TABS(2) OBJECT(.\Objects\spiDrivers.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include "types.h"
+   3          #include "mainHeaders.h"
+   4          #include "dlyMs.h"
+   5          
+   6          sbit CLK=P1^0;
+   7          sbit Din=P1^1;
+   8          sbit Dout=P1^2;
+   9          sbit CS=P1^3;
+  10          
+  11          f32 fread_mcp3204_from_lm35()
+  12          {
+  13   1        u8 i;
+  14   1        u16 adc_value=0;
+  15   1        f32 analog_reading;
+  16   1        CLK=Din=Dout=CS=1;
+  17   1        CS=0;
+  18   1        CLK =0; CLK=1;
+  19   1        CLK =0; CLK=1;
+  20   1        CLK =0; CLK=1;
+  21   1        CLK =0; 
+  22   1        Din=0;
+  23   1        CLK=1;
+  24   1        CLK =0; CLK=1;
+  25   1        CLK =0; CLK=1;
+  26   1        CLK =0; CLK=1;
+  27   1        for(i=0;i<12;i++)
+  28   1        {
+  29   2          CLK=0; 
+  30   2          CLK=1;
+  31   2          if(Dout) adc_value |= (1<<(11-i));
+  32   2        }
+  33   1        CS=1; 
+  34   1        analog_reading = adc_value * (5.0/4096);
+  35   1        return analog_reading*100;
+  36   1      }
+  37          
+  38          
+  39          
+  40          
+  41          
+  42          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    127    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

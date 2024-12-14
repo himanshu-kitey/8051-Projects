@@ -1,0 +1,120 @@
+C51 COMPILER V9.60.7.0   I2CDRIVERS                                                        12/14/2024 20:52:33 PAGE 1   
+
+
+C51 COMPILER V9.60.7.0, COMPILATION OF MODULE I2CDRIVERS
+OBJECT MODULE PLACED IN .\Objects\i2cDrivers.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE i2cDrivers.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listing
+                    -s\i2cDrivers.lst) TABS(2) OBJECT(.\Objects\i2cDrivers.obj)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #include "types.h"
+   3          #include "dlyMs.h"
+   4          
+   5          sbit SCL=P1^4;
+   6          sbit SDA=P1^5;
+   7          
+   8          void i2c_start(void)
+   9          {
+  10   1        SDA=0;
+  11   1      }
+  12          
+  13          void i2c_stop(void)
+  14          {
+  15   1        SCL=0;
+  16   1        SDA=0;
+  17   1        SCL=1;
+  18   1        SDA=1;
+  19   1      }
+  20          
+  21          void i2c_restart(void)
+  22          {
+  23   1        SCL=0;
+  24   1        SDA=1;
+  25   1        SCL=1;
+  26   1        SDA=0;
+  27   1      }
+  28          
+  29          void i2c_slave_ack(void)
+  30          {
+  31   1        SCL=0;
+  32   1        SDA=1;
+  33   1        SCL=1;
+  34   1        while(SDA);
+  35   1      }
+  36          
+  37          void i2c_not_ack(void)
+  38          {
+  39   1        SCL=0;
+  40   1        SDA=1;
+  41   1        SCL=1;
+  42   1      }
+  43          
+  44          void i2c_write(u8 value)
+  45          {
+  46   1        u8 i;
+  47   1        for(i=0;i<8;i++)
+  48   1        {
+  49   2          SCL=0;
+  50   2          SDA = (value >>(7-i))&1;
+  51   2          SCL=1;
+  52   2        }
+  53   1      }
+  54          
+C51 COMPILER V9.60.7.0   I2CDRIVERS                                                        12/14/2024 20:52:33 PAGE 2   
+
+  55          u8 i2c_read(void)
+  56          {
+  57   1        u8 i,buff=0;
+  58   1        for(i=0;i<8;i++)
+  59   1        {
+  60   2          SCL=0; SCL=1;
+  61   2          if(SDA) buff |= (0x80>>i);
+  62   2        }
+  63   1        return buff;
+  64   1      }
+  65          
+  66          void i2c_byte_write(u8 ad,u8 da)
+  67          {
+  68   1        i2c_start();
+  69   1        i2c_write(0x50<<1);
+  70   1        i2c_slave_ack();
+  71   1        i2c_write(ad);
+  72   1        i2c_slave_ack();
+  73   1        i2c_write(da);
+  74   1        i2c_slave_ack();
+  75   1        i2c_stop();
+  76   1        dlyMs(10);
+  77   1      }
+  78          
+  79          u8 i2c_random_read(u8 ad)
+  80          {
+  81   1        u8 buff;
+  82   1        i2c_start();
+  83   1        i2c_write(0x50<<1);
+  84   1        i2c_slave_ack();
+  85   1        i2c_write(ad);
+  86   1        i2c_slave_ack();
+  87   1        i2c_restart();
+  88   1        i2c_write((0x50<<1)|1);
+  89   1        i2c_slave_ack();
+  90   1        buff=i2c_read();
+  91   1        i2c_not_ack();
+  92   1        i2c_stop();
+  93   1        return buff;
+  94   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    165    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
