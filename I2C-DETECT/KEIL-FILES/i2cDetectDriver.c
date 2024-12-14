@@ -64,16 +64,7 @@ void i2cDetect(void)
 				lcd_string("0x");
 				lcdDecToHex(address);
 				dlyMs(1000);
-			}/*
-			else if(ack==4)
-			{
-				lcd_cmd(0x01);
-				lcd_cmd(0x80);
-				lcd_string("Unknown Error");
-				lcd_cmd(0xC0);
-				lcd_string("at:0x");
-				lcdDecToHex(address);
-			}*/
+			}
 			i2cStop();
 			dlyMs(100);			
 		}

@@ -4,14 +4,6 @@ void main()
 	i2cDetect();
 }
 
-
-
-
-
-
-
-
-
 /*
 #include <reg51.h>
 #include "types.h"

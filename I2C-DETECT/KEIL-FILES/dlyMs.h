@@ -3,8 +3,6 @@
 
 #include "types.h"
 
-void delayMs(u16 ms);
-
 void dlyMs(u16 dlyMS);
 
 #endif
